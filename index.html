@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>emcio.world</title>
+    <style>
+        :root {
+            --accent: #ff4757;
+            --dark: #2f3542;
+            --grey: #f1f2f6;
+            --text: #57606f;
+            --p: #c7c7ca;      }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        html { scroll-behavior: smooth; }
+        body { color: var(--text); line-height: 1.6; background: #24252c; overflow-x: hidden; }
+
+       /* Navigation */
+
+nav {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 1.5rem 10%;
+
+    position: sticky;
+
+    top: 0;
+
+    background: var(--dark);
+
+    z-index: 100;
+
+    border-bottom: 1px solid var(--grey);
+
+}
+
+
+.logo { 
+
+    font-weight: 800; 
+
+    font-size: 1.2rem; 
+
+    color: var(--grey); 
+
+    text-transform: uppercase; 
+
+
+}
+
+
+.nav-links a { 
+
+    text-decoration: none; 
+
+    color: var(--grey); 
+
+    margin-left: 2rem; 
+
+    font-size: 0.9rem; 
+
+    font-weight: 500; 
+
+    position: relative; /* Required for the animation */
+
+    padding: 4px 0;
+
+    transition: color 0.3s ease;
+
+}
+
+
+/* The "cool" underline effect */
+
+.nav-links a::after {
+
+    content: '';
+
+    position: absolute;
+
+    width: 0;
+
+    height: 2px;
+
+    bottom: 0;
+
+    left: 50%;
+
+    background-color: var(--accent);
+
+    transition: all 0.3s ease-in-out;
+
+    transform: translateX(-50%);
+
+}
+
+
+.nav-links a:hover { 
+
+    color: var(--accent); 
+
+}
+
+
+/* Animate the underline to expand from center on hover */
+
+.nav-links a:hover::after {
+
+    width: 100%;
+
+}
+
+        /* Hero */
+        .hero {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 10%;
+            background: var(--grey);
+            z-index: 99;
+        }
+        .hero h1 { font-size: 4rem; color: var(--dark); line-height: 1.1; margin-bottom: 1rem; z-index: 99; }
+        .hero p { font-size: 1.5rem; max-width: 600px; margin-bottom: 2rem; z-index: 99; }
+
+        .hero-content {
+
+    background: rgba(20, 20, 20, 0.5); /* Bardzo delikatny szary */
+
+    padding: 3rem;
+
+    border-radius: 30px;
+
+    backdrop-filter: blur(8px); /* Efekt rozmycia tła za polem */
+
+    border: 1px solid rgba(0, 0, 0, 0.05);
+
+    display: inline-block;
+
+    width: 48%;
+
+    z-index: 98;
+
+}
+
+        /* Projects Grid */
+        .container { padding: 5rem 10%; }        .section-title { font-size: 2rem; color: var(--dark); margin-bottom: 3rem; }
+        
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+        .project-card {
+            background: transparent; border-radius: 12px; padding: 0%;
+            overflow: hidden;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        .project-card:hover { transform: translateY(-5px); }
+        .project-img { height: 250px; background: transparent; width: 100%; }
+        .project-info { background: var(--dark); padding: 1.5rem; flex-grow: 1; justify-content: center; align-items: center; text-align: center; display: flex; flex-direction: column; }
+        .project-info h3 { color: var(--grey); margin-bottom: 0.5rem; }
+        .project-info p { color: var(--p); }
+
+        /* Contact Section */
+        .contact-box {
+            background: var(--dark);
+            color: white;
+            padding: 4rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: 0.3s;
+        }
+        .contact-box:hover { transform: translateY(-5px); }
+        .contact-box h2 { color: var(--grey); font-size: 2.5rem; margin-bottom: 1rem; }
+        .email-link { color: var(--accent); font-size: 1.5rem; text-decoration: none; font-weight: bold; }
+
+        footer { text-align: center; padding: 3rem; font-size: 0.8rem; color: #a4b0be; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .nav-links { display: none; }
+            .project-grid { grid-template-columns: 1fr; }
+        }
+
+
+
+#hero-video {
+
+    position: absolute;
+
+    top: 50%;
+
+    left: 50%;
+
+    min-width: 100%;
+
+    min-height: 100%;
+
+    width: auto;
+
+    height: auto;
+
+    z-index: 0;
+
+    transform: translate(-50%, -50%);
+
+    object-fit: cover; /* Sprawia, że film wypełnia tło bez zniekształceń */
+
+}
+
+/* Główne tło Lightboxa */
+/* Główne tło Lightboxa */
+.lightbox {
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0); /* Startujemy od pełnej przezroczystości */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* Ukrywamy element, ale przygotowujemy go do animacji */
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease, background 0.3s ease, visibility 0.3s;
+}
+
+/* Stan po kliknięciu (pojawienie się) */
+.lightbox:target {
+    visibility: visible;
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.9);
+}
+
+/* Tło zamykające */
+.lightbox-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    cursor: default;
+}
+
+/* Animacja samego zdjęcia */
+.lightbox .content img {
+    max-width: 90vw;
+    max-height: 85vh;
+    border-radius: 8px;
+    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+    
+    /* Efekt startowy zdjęcia: nieco mniejsze */
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+    pointer-events: auto;
+}
+
+/* Gdy lightbox jest aktywny, zdjęcie rośnie do normalnych rozmiarów */
+.lightbox:target .content img {
+    transform: scale(1);
+}
+
+.lightbox .content {
+    position: relative;
+    z-index: 2;
+    pointer-events: none;
+}
+
+#projects {
+    /* To doda 100px odstępu od góry ekranu TYLKO podczas przewijania z menu */
+    scroll-margin-top: 50px; 
+}
+
+#about {
+    /* To doda 100px odstępu od góry ekranu TYLKO podczas przewijania z menu */
+    scroll-margin-top: 50px; 
+}
+
+
+    </style>
+
+
+
+</head>
+<body>
+
+    <nav>
+        <a style="text-decoration: none;" href="#" class="logo">emcio.world</a>
+        <div class="nav-links">
+            <a href="#about">O mnie</a>
+            <a href="#projects">Projekty</a>
+            <a href="#contact">Kontakt</a>
+        </div>
+    </nav>
+
+
+    
+</div>
+
+    <header class="hero">
+    <div class="hero-content">
+        
+        <h1 style="color: var(--grey);">Witamy w świecie E!</h1>
+        <p style="color: var(--p);">Znajdziesz na tej stronie opis o mnie<br>oraz moje projekty!</p>
+        </div>
+        <video autoplay muted loop playsinline id="hero-video">
+
+        <source src="https://www.dropbox.com/scl/fi/y6dr1td3jlbkrrrr8nz7c/emciovitz.mp4?rlkey=nfw0ukpwo3fktcnvimtdnudv7&st=6xh43q7m&dl=1" type="video/mp4">
+    </header>
+
+    <section class="container" id="about" style="margin-top: 9rem;">
+
+        <h2 class="section-title" style="color: var(--grey);">O mnie</h2>
+
+        <div class="project-grid">
+
+            <div class="project-card">
+
+                <div class="project-img" style="background: #24252c;">
+                     <img src="cinema.jpg" alt="" class="project-img">
+                </div>
+
+                <div class="project-info">
+
+                    <center><h3 style="font-size: 113%;">Professional Coder in Python/Java/JS/HTML/CSS!</h3></center>
+
+                    <center><p style="font-size: 95%;">(absolute cinema)</p></center>
+
+                </div>
+
+            </div>
+
+            <div class="project-card">
+
+                <div class="project-img" style="background: transparent;">
+                    <img src="emciopfpstare.png" alt="" class="project-img">
+                </div>
+
+                <div class="project-info">
+
+                    <center><h3 style="font-size: 113%;" >Nazywam się Olek!</h3>
+
+                    <p style="font-size: 95%;">Chodzę do 5bxd klasy. XD</p></center>
+
+                </div>
+
+            </div>
+
+            <div class="project-card">
+
+                <div class="project-img" style="background: transparent;">
+                    <a href="#zoom-img">
+                    <img src="twosides.png" alt="" class="project-img">
+                    </a>
+                </div>
+
+                <div class="project-info">
+
+                    <center><h3 style="font-size: 105%;">Mam dwie strony! E-World i olek5bxd,<br> czyli moje alter ego c:</h3>
+
+                    <p style="font-size: 95%;">Jestem debilem, co nie?</p></center>
+
+                </div>
+
+            </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="container" id="projects" style="position: relative; bottom: 100px;">
+
+        <h2 class="section-title" style="color: var(--grey); position: relative; bottom: 5px;">Projekty</h2>
+
+        <div class="project-grid">
+
+            <div class="project-card">
+
+                <div class="project-img" style="background: #24252c;">
+                    <a href="#zoomimg">
+                     <img src="voltageemc.png" alt="" class="project-img">
+                     </a>
+                </div>
+
+                <div class="project-info">
+
+                    <center><h3 style="font-size: 113%;">Pracuję nad swoim klientem do Minecraft!</h3></center>
+
+                    <center><p style="font-size: 95%;">VoltageClient - soon🤫</p></center>
+
+                </div>
+
+            </div>
+    
+            <div class="project-card">
+
+                <div class="project-img" style="background: transparent;">
+                    <img src="emciaai.png" alt="" class="project-img">
+                </div>
+
+                <div class="project-info">
+
+                    <center><h3 style="font-size: 113%;" >Pracuję nad swoją sztuczną inteligencją!</h3>
+
+                    <p style="font-size: 95%;">emciaAI - soon🤫</p></center>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="container" id="contact">
+        <div class="contact-box">
+            <h2>Masz zapytanie?</h2>
+            <p style="color: var(--grey);">Pisz do emcia.</p><br><a href="https://discord.com" class="email-link">Discord: httpsboom</a><br>
+            <a href="mailto:maddoggk700@wp.pl" class="email-link">E-mail: xynistocwel@op.pl</a>
+        </div>
+    </section>
+
+    <footer>
+    </footer>
+
+    <div id="zoom-img" class="lightbox">
+    <a href="#about" class="lightbox-overlay"></a>
+    
+    <div class="content">
+        <img src="twosides.png" alt="">
+    </div>
+</div>
+
+   <div id="zoomimg" class="lightbox">
+    <a href="#projects" class="lightbox-overlay"></a>
+    
+    <div class="content">
+        <img src="voltageemc.png" alt="">
+    </div>
+</div>
+
+</body>
+</html>
