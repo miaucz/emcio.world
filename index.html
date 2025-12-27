@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/x-icon" href="emciopfpstare.ico">
-    <title>» emcio.world</title>
+    <title>emcio.world</title>
     <style>
         :root {
             --accent: #ff4757;
@@ -50,7 +49,20 @@ nav {
 
     color: var(--grey); 
 
-    text-transform: uppercase; 
+    text-transform: uppercase;
+    text-decoration: none; 
+
+    color: var(--grey); 
+
+    margin-left: 2rem; 
+
+    position: relative; /* Required for the animation */
+
+    padding: 4px 0;
+
+    transition: color 0.3s ease;
+    display: inline-block;
+    width: auto;
 
 
 }
@@ -73,8 +85,13 @@ nav {
     padding: 4px 0;
 
     transition: color 0.3s ease;
+    display: inline-block;
 
 }
+
+
+
+
 
 
 /* The "cool" underline effect */
@@ -89,7 +106,7 @@ nav {
 
     height: 2px;
 
-    bottom: 0;
+    bottom: 2px;
 
     left: 50%;
 
@@ -98,10 +115,33 @@ nav {
     transition: all 0.3s ease-in-out;
 
     transform: translateX(-50%);
+    z-index: 5;
+}
 
+.logo::after {
+
+    content: '';
+
+    position: absolute;
+
+    width: 0;
+
+    height: 2px;
+
+    bottom: 5px;
+
+    left: 50%;
+
+    background-color: var(--accent);
+
+    transition: all 0.3s ease-in-out;
+
+    transform: translateX(-50%);
+    z-index: 5;
 }
 
 
+.logo:hover,
 .nav-links a:hover { 
 
     color: var(--accent); 
@@ -111,9 +151,10 @@ nav {
 
 /* Animate the underline to expand from center on hover */
 
+.logo:hover::after,
 .nav-links a:hover::after {
 
-    width: 100%;
+    width: 100% !important;
 
 }
 
@@ -140,15 +181,19 @@ nav {
 
     backdrop-filter: blur(8px); /* Efekt rozmycia tła za polem */
 
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    border: 3px solid;
+    border-color: var(--grey);
 
     display: inline-block;
 
-    width: 48%;
+    width: 49%;
+    height: 31%;
+    transition: 0.3s;
 
     z-index: 98;
 
 }
+    .hero-content:hover { transform: translateY(-5px); border: 3px solid; border-color: var(--accent); }
 
         /* Projects Grid */
         .container { padding: 5rem 10%; }        .section-title { font-size: 2rem; color: var(--dark); margin-bottom: 3rem; }
@@ -180,8 +225,10 @@ nav {
             border-radius: 20px;
             text-align: center;
             transition: 0.3s;
+            border: 3px solid;
+            border-color: var(--grey);
         }
-        .contact-box:hover { transform: translateY(-5px); }
+        .contact-box:hover { transform: translateY(-5px); border: 3px solid; border-color: var(--accent); }
         .contact-box h2 { color: var(--grey); font-size: 2.5rem; margin-bottom: 1rem; }
         .email-link { color: var(--accent); font-size: 1.5rem; text-decoration: none; font-weight: bold; }
 
@@ -313,8 +360,8 @@ nav {
     <header class="hero">
     <div class="hero-content">
         
-        <h1 style="color: var(--grey);">Witamy w świecie E!</h1>
-        <p style="color: var(--p);">Znajdziesz na tej stronie opis o mnie<br>oraz moje projekty!</p>
+        <h1 style="color: var(--grey); position: relative; left: 8px; bottom: 15px;">Witamy w świecie E!</h1>
+        <p style="color: var(--p); position: relative; left: 8px; bottom: 15px;">Znajdziesz na tej stronie opis o mnie<br>oraz moje projekty!</p>
         </div>
         <video autoplay muted loop playsinline id="hero-video">
 
@@ -435,7 +482,7 @@ nav {
     </footer>
 
     <div id="zoom-img" class="lightbox">
-    <a href="#!" class="lightbox-overlay"></a>
+    <a href="#about" class="lightbox-overlay"></a>
     
     <div class="content">
         <img src="twosides.png" alt="">
@@ -443,7 +490,7 @@ nav {
 </div>
 
    <div id="zoomimg" class="lightbox">
-    <a href="#!" class="lightbox-overlay"></a>
+    <a href="#projects" class="lightbox-overlay"></a>
     
     <div class="content">
         <img src="voltageemc.png" alt="">
@@ -451,8 +498,4 @@ nav {
 </div>
 
 </body>
-
 </html>
-
-
-
