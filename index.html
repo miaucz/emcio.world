@@ -37,7 +37,7 @@ nav {
 
     z-index: 100;
 
-    border-bottom: 1px solid var(--grey);
+    border-bottom: 2px solid var(--grey);
 
 }
 
@@ -166,32 +166,42 @@ nav {
             padding: 0 10%;
             background: var(--grey);
             z-index: 99;
+            position: relative;
         }
         .hero h1 { font-size: 4rem; color: var(--dark); line-height: 1.1; margin-bottom: 1rem; z-index: 99; }
         .hero p { font-size: 1.5rem; max-width: 600px; margin-bottom: 2rem; z-index: 99; }
 
-        .hero-content {
-
-    background: rgba(20, 20, 20, 0.5); /* Bardzo delikatny szary */
-
-    padding: 3rem;
-
+ .hero-content {
+    background: rgba(20, 20, 20, 0.5);
+    padding: 2rem; /* Zmniejsz nieco padding na rzecz elastyczności */
     border-radius: 30px;
-
-    backdrop-filter: blur(8px); /* Efekt rozmycia tła za polem */
-
-    border: 3px solid;
-    border-color: var(--grey);
-
+    backdrop-filter: blur(8px);
+    border: 3px solid var(--grey);
     display: inline-block;
-
-    width: 50%;
-    height: 31%;
+    
+    /* KLUCZOWE ZMIANY: */
+    width: auto;           /* Szerokość dopasuje się do treści */
+    max-width: 71%;       /* Ale nie wyjdzie poza ekran */
+    height: auto;  
+    max-height: 29%;        /* Wysokość dopasuje się do ilości tekstu */
+    min-width: 300px;      /* Minimalna szerokość, żeby nie był za wąski */
+    
     transition: 0.3s;
-
     z-index: 98;
-
 }
+
+.hero h1 { 
+    font-size: clamp(2rem, 8vw, 4rem); /* Skaluje się od 2rem do 4rem zależnie od ekranu */
+    color: var(--grey); 
+    line-height: 1.1; 
+    margin-bottom: 1rem; 
+}
+
+.hero p { 
+    font-size: clamp(1rem, 3vw, 1.5rem); 
+    max-width: 600px; 
+}
+
     .hero-content:hover { transform: translateY(-5px); border: 3px solid; border-color: var(--accent); }
 
         /* Projects Grid */
@@ -263,6 +273,7 @@ nav {
     transform: translate(-50%, -50%);
 
     object-fit: cover; /* Sprawia, że film wypełnia tło bez zniekształceń */
+    pointer-events: none;
 
 }
 
@@ -417,7 +428,7 @@ nav {
 
                     <center><h3 style="font-size: 105%;">Mam dwie strony! E-World i olek5bxd,<br> czyli moje alter ego c:</h3>
 
-                    <p style="font-size: 95%;">Co jest ze mną nie tak?</p></center>
+                    <p style="font-size: 95%;">Jestem debilem, co nie?</p></center>
 
                 </div>
 
@@ -473,7 +484,7 @@ nav {
         <div class="contact-box">
             <h2>Masz zapytanie?</h2>
             <p style="color: var(--grey);">Pisz do emcia.</p><br><a class="email-link">Discord: httpsboom</a><br>
-            <a class="email-link">E-mail: xynistocwel@op.pl</a>
+            <a href="mailto:maddoggk700@wp.pl" class="email-link">E-mail: xynistocwel@op.pl</a>
         </div>
     </section>
 
@@ -497,10 +508,4 @@ nav {
 </div>
 
 </body>
-
 </html>
-
-
-
-
-
